@@ -1,0 +1,42 @@
+import Link from 'next/link';
+import s from './Products.module.scss';
+
+type CategoryProps = {
+    id:number;
+    title:string;
+}
+type Props = {
+    id:number;
+    image:string;
+    title:string;
+    category:CategoryProps;
+    price:number;
+}
+// TODO: Link á vöru og bæta við í körfu.
+export function Products({title, products}:{title:string, products:Props[]}):JSX.Element {
+
+    return (
+        <section className={s.products}>
+          <h2 className={s.products__title}>{title}</h2>
+          <ul className={s.products__list}>
+            {products.map((item, i) => {
+              return (
+                <li className={s.products__product} key={i}>
+                    <div className={s.products__productImage}>
+                    {item.image && (
+                        <img className={s.products__productImg} src={item.image} alt={`Mynd af ${item.title}`} />
+                        )}
+                    </div>
+                    <div className={s.products__productContent}>
+                        <div className={s.products__productText}>
+                            <h3 className={s.products__productTitle}>{item.title}</h3>
+                        </div>
+                            <p className={s.products__productPrice}>{item.price} kr.-</p>
+                    </div>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+      )
+}
