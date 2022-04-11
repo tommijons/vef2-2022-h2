@@ -1,0 +1,27 @@
+
+.layout {
+    &__header {
+        padding: 0 1rem;
+      }
+    
+      &__main {
+        margin-bottom: 1rem;
+        padding: 0 1rem;
+      }
+      
+      &__footer {
+        padding: 1rem;
+        border-top: 1px solid #333;
+      }
+
+  &__list {
+    display: flex;
+    list-style: none;
+  }
+
+  &__listItem {
+    &:first-child {
+      margin-right: 1rem;
+    }
+  }
+}
