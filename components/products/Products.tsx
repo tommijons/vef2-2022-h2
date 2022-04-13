@@ -12,7 +12,8 @@ type Props = {
     category:CategoryProps;
     price:number;
 }
-// TODO: Link á vöru og bæta við í körfu.
+
+// TODO: bæta við í körfu.
 export function Products({title, products}:{title:string, products:Props[]}):JSX.Element {
 
     return (
@@ -29,7 +30,7 @@ export function Products({title, products}:{title:string, products:Props[]}):JSX
                     </div>
                     <div className={s.products__productContent}>
                         <div className={s.products__productText}>
-                            <h3 className={s.products__productTitle}>{item.title}</h3>
+                            <h3 className={s.products__productTitle}><Link href={`/menu/${item.id}`} >{item.title}</Link></h3>
                         </div>
                             <p className={s.products__productPrice}>{item.price} kr.-</p>
                     </div>
