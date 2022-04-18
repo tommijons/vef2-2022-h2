@@ -17,6 +17,7 @@ export function Layout({ title, children, footer }: Props): JSX.Element {
         <nav>
           <ul className={s.layout__list}>
             <li className={s.layout__listItem}><Link href="/menu">Matseðill</Link></li>
+            <li className={s.layout__listItem}><Link href="/categories">Vöruflokkar</Link></li>
             <li className={s.layout__listItem}><Link href="/cart">Karfa</Link></li>
           </ul>
         </nav>

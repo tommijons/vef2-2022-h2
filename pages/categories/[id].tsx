@@ -1,6 +1,6 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Layout } from "../../components/layout/Layout";
-import Product from "../../components/product/Product";
+import Category from "../../components/category/Category";
 import { HerokuUrl, RestaurantName } from "../api/globals";
 
 export default function ProductPage({ data }: InferGetServerSidePropsType<typeof getServerSideProps>):JSX.Element {
@@ -12,21 +12,16 @@ export default function ProductPage({ data }: InferGetServerSidePropsType<typeof
             <div></div>
         }
         >
-            <Product
-            image={data.image}
-            title={data.title}
-            description={data.description}
-            category={data.category}
-            price={data.price}
-            />
+            <Category title={data.title} created={data.created} updated={data.updated} />
                 
         </Layout>
     )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-    const result = await fetch(`${HerokuUrl}/menu/${params?.id}`);  
+    const result = await fetch(`${HerokuUrl}/categories/${params?.id}`);  
     const data = await result.json();
+    console.log('data :>> ', data);
     return {
         props: {
             data
