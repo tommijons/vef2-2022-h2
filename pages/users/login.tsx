@@ -3,12 +3,13 @@ import Router from "next/router";
 import { useState } from "react";
 import { Layout } from "../../components/layout/Layout";
 import { useUserContext } from "../../context/userContext";
+import { HerokuUrl } from "../api/globals";
 
 const loginHandler = async (event: any) =>{
   event.preventDefault();
   const username = event.target.username.value;
   const password = event.target.password.value;
-  const res = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/users/login', {
+  const res = await fetch(`${HerokuUrl}/users/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
