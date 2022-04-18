@@ -1,4 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import Head from "next/head";
 import { Layout } from "../components/layout/Layout"
 import { Products } from "../components/products/Products";
 
@@ -11,6 +12,9 @@ export default function Menu({ data }: InferGetServerSidePropsType<typeof getSer
                 <div></div>
             }
         >
+            <Head>
+                <title>Matseðill</title>
+            </Head>
             <Products title="Matseðill" products={menuItems} />
         </Layout>
     )
