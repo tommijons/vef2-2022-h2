@@ -2,6 +2,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { Layout } from "../components/layout/Layout"
 import { Products } from "../components/products/Products";
+import { HerokuUrl } from "./api/globals";
 
 export default function Menu({ data }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
     const {items:menuItems } = data;
@@ -21,7 +22,7 @@ export default function Menu({ data }: InferGetServerSidePropsType<typeof getSer
 }
 
 export const getServerSideProps: GetServerSideProps = async() => {
-    const result = await fetch(`https://vef2h1-rfc.herokuapp.com/menu`);  
+    const result = await fetch(`${HerokuUrl}/menu`);  
     const data = await result.json();
   
     return {
