@@ -39,7 +39,7 @@ export default function Login() {
         const user = await loginHandler(event);
 
         if(user.user !== undefined) {
-          loginContext.state.setLogin({ login: true, user: user });
+          loginContext.setLogin({ login: true, user: user });
           localStorage.setItem("user", JSON.stringify({ login: true, user: user }));
           setFail(false);
           Router.push('/');

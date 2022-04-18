@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { Layout } from '../components/layout/Layout'
+import { Footer } from '../components/footer/Footer'
 
 const Home: NextPage = () => {
 
@@ -10,7 +11,7 @@ const Home: NextPage = () => {
     <Layout 
     title="RFC" 
     footer= {
-      <div></div>
+      <Footer></Footer>
     }
     >
       <Head>
