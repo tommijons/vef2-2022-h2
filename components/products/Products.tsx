@@ -1,20 +1,9 @@
 import Link from 'next/link';
+import { ProductsProps } from '../../pages/api/types';
 import s from './Products.module.scss';
 
-type CategoryProps = {
-    id:number;
-    title:string;
-}
-type Props = {
-    id:number;
-    image:string;
-    title:string;
-    category:CategoryProps;
-    price:number;
-}
-
 // TODO: bæta við í körfu.
-export function Products({title, products}:{title:string, products:Props[]}):JSX.Element {
+export function Products({title, products}:{title:string, products:ProductsProps[]}):JSX.Element {
 
     return (
         <section className={s.products}>

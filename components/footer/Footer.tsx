@@ -7,7 +7,7 @@ export function Footer(): JSX.Element {
     <>
       <Link href='/'><a>Forsíða</a></Link>
       {
-        loginContext.login.login ? <p>Skráður inn sem <b>{loginContext.login.user.user.username}</b></p> : <Link href='/users/login'>Innskráning</Link>
+        loginContext.login.login ? <p>Skráður inn sem <b>{loginContext.login.user.user.username}</b></p>  : <Link href='/users/login'>Innskráning</Link>
       }
     </>
   )
