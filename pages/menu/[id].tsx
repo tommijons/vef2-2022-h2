@@ -1,36 +1,24 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Layout } from "../../components/layout/Layout";
-import Product from "../../components/product/Product";
-import { HerokuUrl } from "../api/globals";
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { Layout } from '../../components/layout/Layout';
+import Product from '../../components/product/Product';
+import { Restaurant } from '../api/globals';
 
-export default function ProductPage({ data }: InferGetServerSidePropsType<typeof getServerSideProps>):JSX.Element {
-
-    return(
-        <Layout
-        title="RFC"
-        footer={
-            <div></div>
-        }
-        >
-            <Product
-            image={data.image}
-            title={data.title}
-            description={data.description}
-            category={data.category}
-            price={data.price}
-            />
-                
-        </Layout>
-    )
+export default function ProductPage({
+  data,
+}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+  return (
+    <Layout title={Restaurant.name} footer={<div></div>}>
+      <Product product={data} />
+    </Layout>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-    const result = await fetch(`${HerokuUrl}/menu/${params?.id}`);  
-    const data = await result.json();
-    console.log('data :>> ', data);
-    return {
-        props: {
-            data
-        },
-    };
-}
+  const result = await fetch(`${Restaurant.url}/menu/${params?.id}`);
+  const data = await result.json();
+  return {
+    props: {
+      data,
+    },
+  };
+};

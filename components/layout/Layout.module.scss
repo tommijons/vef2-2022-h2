@@ -1,27 +1,51 @@
-
 .layout {
-    &__header {
-        padding: 0 1rem;
-      }
-    
-      &__main {
-        margin-bottom: 1rem;
-        padding: 0 1rem;
-      }
-      
-      &__footer {
-        padding: 1rem;
-        border-top: 1px solid #333;
-      }
+  &__header {
+    background-color: rgb(228, 68, 36);
+    color: white;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 0 1rem;
+    position: sticky;
+  }
+
+  &__main {
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+  }
+
+  &__footer {
+    padding: 1rem;
+    border-top: 1px solid #333;
+  }
 
   &__list {
     display: flex;
     list-style: none;
+    margin-top: 30px;
   }
 
   &__listItem {
     &:first-child {
       margin-right: 1rem;
     }
+
+    &:nth-child(2) {
+      margin-right: 1rem;
+    }
+  }
+
+  &__cart {
+    cursor: pointer;
+    height: 19px;
+    width: 19px;
+    position: relative;
+  }
+
+  &__cartItems {
+    position: absolute;
+    top: -110%;
+    right: 25%;
+    font-size: 0.7rem;
   }
 }

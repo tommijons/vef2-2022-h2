@@ -1,33 +1,46 @@
+import Image from 'next/image';
 import Link from 'next/link';
+import { ProductsProps } from '../../pages/api/types';
 import s from './Product.module.scss';
-
-type CategoryProps = {
-    id:number;
-    title:string;
-}
-type Props = {
-    image:string;
-    title:string;
-    description:string;
-    category:CategoryProps;
-    price:number;
-}
+import basket from '../../public/shopping-cart.png';
 
 // TODO: Bæta við í körfu.
-export default function Product({ image, title, category, description, price}:Props):JSX.Element {
-
-    return (
-        <section className={s.product}>
-            <h2 className={s.product__title}>{title}</h2>
-            <p className={s.product__category}>{category.title}</p>
-            <div className={s.product__image}>
-                {image && (
-                    <img className={s.product__img} src={image} alt={`Mynd af ${title}`} />
-                    )}
+export default function Product({
+  product,
+}: {
+  product: ProductsProps;
+}): JSX.Element {
+  return (
+    <section className={s.product}>
+      <h2 className={s.product__title}>{product.title}</h2>
+      <hr className={s.product__dividerLine}></hr>
+      <p className={s.product__category}>{product.category.title}</p>
+      <div className={s.product__product}>
+        <div className={s.product__text}>
+          <p className={s.product__description}>{product.description}</p>
+        </div>
+        <div className={s.product__right}>
+        <div className={s.product__image}>
+          {product.image && (
+            <img
+              className={s.product__img}
+              src={product.image}
+              alt={`Mynd af ${product.title}`}
+            />
+          )}
+        </div>
+        <div className={s.product__lower}>
+            <p className={s.product__price}>Verð: {product.price} kr.</p>
+            <div className={s.product__productToBasket}>
+              <p className={s.product__productAdd}>Bæta í körfu</p>
+              <div className={s.product__productBasket}>
+                <Image src={basket} alt={'karfa'} layout='fill' />
+              </div>
             </div>
-            <p className={s.product__description}>{description}</p>
-            <p className={s.product__price}>{price} kr.</p>
-            <p><Link href="/menu">Til baka</Link></p>
-        </section>
-    )
+          </div>
+        
+        </div>
+      </div>
+    </section>
+  );
 }

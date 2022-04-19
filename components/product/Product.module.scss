@@ -1,1 +1,82 @@
-// TODO: Product styles
+.product {
+    display: grid;
+    width: 100vw;
+    justify-content: center;
+
+    &__title {
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    &__dividerLine {
+        border: 1px solid black;
+        width: 75vw;
+        margin-bottom: 3rem;
+    }
+
+    &__product {
+        width: 75vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__image {
+        width: 100%;
+    }
+
+    &__img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 50%;
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    &__lower {
+        margin-top: -10px;
+        background-color: black;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__description {
+        padding: 0 1rem;
+        position: relative;
+        top: 40%;
+    }
+
+    &__price {
+        padding: 0 1rem;
+        color: white;
+    }
+
+    &__productToBasket {
+        display: flex;
+        flex-directon: row;
+        padding: 0 1rem;
+    }
+
+    &__productAdd {
+        color: white;
+    }
+
+    &__productBasket {
+        height: 20px;
+        width: 20px;
+        position: relative;
+        margin-top: 15px;
+        margin-left: 1rem;
+    }
+}
