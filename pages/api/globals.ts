@@ -1,6 +1,6 @@
 export const syni = {
     url: 'https://vef2-2022-h1-synilausn.herokuapp.com',
-    name: 'Veitingastaðurinn X'
+    name: 'Nextaurant'
 }
 
 export const rfc = {
