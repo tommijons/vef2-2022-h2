@@ -1,0 +1,17 @@
+
+.button {
+
+    background-color: rgb(214, 191, 166);
+    border: 1px solid #fff;
+    border-radius: 8px;
+    max-width: 300px;
+    padding: 0.5rem;
+    transition: background-color ease-in 200ms, color ease-in 200ms;
+    width: 100%;
+
+
+  &:hover {
+    background-color: var(--color-accent-dark);
+    color: var(--color-white);
+  }
+}

@@ -3,6 +3,7 @@ import { ProductsProps } from '../../pages/api/types';
 import s from './Products.module.scss';
 import basket from '../../public/shopping-cart.png';
 import Image from 'next/image';
+import Cart from '../cart/Cart';
 
 // TODO: bæta við í körfu.
 export function Products({
@@ -41,7 +42,7 @@ export function Products({
                 <div className={s.products__productLower}>
                   <p className={s.products__productPrice}>{item.price} kr.-</p>
                   <div className={s.products__productToBasket}>
-                    <p className={s.products__productAdd}>Bæta í körfu</p>
+                    <Cart product={item.id}></Cart>
                     <div className={s.products__productBasket}>
                       <Image src={basket} alt={'karfa'} layout='fill' />
                     </div>
