@@ -6,8 +6,8 @@ export function AppWrapper({ children }) {
   const [login, setLogin] = useState({});
 
   const logOut = () => {
-    setLogin({ login: false, name: {}});
-    localStorage.setItem("user", JSON.stringify({ login: false, name: {}}));
+    setLogin({ login: false, user: {}});
+    localStorage.setItem("user", JSON.stringify({ login: false, user: {}}));
   }
 
   useEffect(() => {   
