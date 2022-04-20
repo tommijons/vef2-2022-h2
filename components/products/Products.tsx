@@ -42,7 +42,7 @@ export function Products({
                 <div className={s.products__productLower}>
                   <p className={s.products__productPrice}>{item.price} kr.-</p>
                   <div className={s.products__productToBasket}>
-                    <Cart product={item.id}></Cart>
+                    <Cart product={item.id} quantity={1}></Cart>
                     <div className={s.products__productBasket}>
                       <Image src={basket} alt={'karfa'} layout='fill' />
                     </div>
