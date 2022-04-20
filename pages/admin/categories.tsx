@@ -18,8 +18,8 @@ export default function Categories({ data }: InferGetServerSidePropsType<typeof 
       const user = await loginContext.login.user;
       if(user !== undefined){
         setToken(user.token)
-        setLoading(false);
       }  
+      setLoading(false);
     }
     checkLogin();
   }, [loginContext])
@@ -32,6 +32,15 @@ export default function Categories({ data }: InferGetServerSidePropsType<typeof 
       >
         <p>loading...</p>
       </Layout>
+    )
+  }
+
+  if(!loginContext.login.login) {
+    return (
+      <>
+        <h1>401 access denied</h1>
+        <Link href='/'>Forsíða</Link>
+      </>
     )
   }
 

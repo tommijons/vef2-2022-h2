@@ -6,24 +6,21 @@ import { Layout } from "../../components/layout/Layout";
 import { useUserContext } from "../../context/userContext";
 import { ProductsProps } from "../api/types";
 
-export default function Menu({ data, query }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+export default function Menu({ data }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState('');
   const loginContext = useUserContext();
   const { items } = data;
 
-  let offset = 0;
-  if(query.offset) {
-    offset = query.offset;
-  }
+  let offset = data.offset;
 
   useEffect(() => {
     const checkLogin = async () => {
       const user = await loginContext.login.user;
       if(user !== undefined){
         setToken(user.token)
-        setLoading(false);
-      }  
+      }
+      setLoading(false);
     }
     checkLogin();
   }, [loginContext])
@@ -39,6 +36,15 @@ export default function Menu({ data, query }: InferGetServerSidePropsType<typeof
     )
   }
 
+  if(!loginContext.login.login) {
+    return (
+      <>
+        <h1>401 access denied</h1>
+        <Link href='/'>Forsíða</Link>
+      </>
+    )
+  }
+
   return (
     <Layout
     title='Menu'
@@ -46,7 +52,6 @@ export default function Menu({ data, query }: InferGetServerSidePropsType<typeof
     >
       {items.map((prod: ProductsProps, i: number) => {
         return (
-          <>
           <div key={i}>
             <div>
               {prod.image && (
@@ -88,7 +93,9 @@ export default function Menu({ data, query }: InferGetServerSidePropsType<typeof
               <button type='submit'>Breyta</button>
             </form>
           </div>
-          <form onSubmit={ async (event:any) => {
+        )
+      })}
+      <form onSubmit={ async (event:any) => {
             event.preventDefault();
             const formData = new FormData();
             formData.append('title', event.target.title.value);
@@ -118,9 +125,6 @@ export default function Menu({ data, query }: InferGetServerSidePropsType<typeof
           </form>
           {data._links &&  data._links.prev ? ( <Link href={`/admin/menu?offset=${offset-10}&limit=10`}>Fyrri</Link> ): <></> }
           {data._links &&  data._links.next ? ( <Link href={`/admin/menu?offset=${offset+10}&limit=10`}>Næsta</Link> ): <></> }
-          </>
-        )
-      })}
     </Layout>
   )
 }
@@ -176,6 +180,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const data = await result.json();
 
   return {
-    props: { data, query },
+    props: { data },
   }
 }
