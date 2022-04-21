@@ -1,14 +1,18 @@
 import { Button } from "../form/Button"
 import { Restaurant } from "../../pages/api/globals";
-import { CartContext } from "../../context/cartContext";
+import { useCartContext } from "../../context/cartContext";
 import { useContext } from "react";
 
-export default function Cart(productID:any, quantity:any) {
-    const context = useContext(CartContext);
+export default function Cart(productID: { product: number, quantity: number}) {
+    const cartContext = useCartContext();
     async function onSubmit(e: any) {
         e.preventDefault();
-        
-        const res = await fetch(`${Restaurant.url}/cart/${context.cart.id}`, {
+
+        if(localStorage.getItem("cart") === null) {
+            await cartContext.newCart();
+        }
+        const uid = JSON.parse(localStorage.getItem("cart") ?? '').id;
+        const res = await fetch(`${Restaurant.url}/cart/${uid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -16,10 +20,10 @@ export default function Cart(productID:any, quantity:any) {
                 'Accept-Encoding': 'gzip, deflate, br',
                 Connection: 'keep-alive',
               },
-            body: JSON.stringify({ productID, quantity }),
+            body: JSON.stringify({ uid, product: productID.product, quantity: productID.quantity }),
         });
         const result = await res.json();
-        console.log('res-->', result);
+        cartContext.addItem();
         return result;
         };
     

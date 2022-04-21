@@ -14,6 +14,19 @@ export type ProductsProps = {
   updated: string;
 };
 
+export type CartProductsProps = {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+  category: CategoryProps;
+  price: number;
+  quantity: number;
+  total: number;
+  created: string;
+  updated: string;
+};
+
 export type PagingProps = {
   limits?: number;
   limit?: number;

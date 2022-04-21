@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCartContext } from '../../context/cartContext';
 import basket from '../../public/shopping-cart.png';
 
 import s from './Layout.module.scss';
@@ -12,6 +13,8 @@ type Props = {
 };
 
 export function Layout({ title, children, footer }: Props): JSX.Element {
+  const cartContext = useCartContext();
+
   return (
     <div className={s.layout}>
       <header className={s.layout__header}>
@@ -28,7 +31,7 @@ export function Layout({ title, children, footer }: Props): JSX.Element {
               <Link href='/cart'>
                 <div className={s.layout__cart}>
                   <Image src={basket} alt={'karfa'} layout='fill' />
-                  <p className={s.layout__cartItems}>0</p>
+                  <p className={s.layout__cartItems}>{cartContext.fjoldi}</p>
                 </div>
               </Link>
             </li>

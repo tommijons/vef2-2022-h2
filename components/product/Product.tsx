@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ProductsProps } from '../../pages/api/types';
 import s from './Product.module.scss';
 import basket from '../../public/shopping-cart.png';
+import Cart from '../cart/Cart';
 
 // TODO: Bæta við í körfu.
 export default function Product({
@@ -32,7 +33,7 @@ export default function Product({
         <div className={s.product__lower}>
             <p className={s.product__price}>Verð: {product.price} kr.</p>
             <div className={s.product__productToBasket}>
-              <p className={s.product__productAdd}>Bæta í körfu</p>
+              <Cart product={product.id} quantity={1}></Cart>
               <div className={s.product__productBasket}>
                 <Image src={basket} alt={'karfa'} layout='fill' />
               </div>
