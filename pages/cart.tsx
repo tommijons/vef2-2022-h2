@@ -49,20 +49,18 @@ export default function Cart() {
         }>
             {data.lines.map((item: CartProductsProps,i: number) => {
                 return (
-                <section className={styles.card}>                
-                    <div key={i}>
-                    <h3>
-                        <p className={styles.title}>{item.title}</p>
-                    </h3>
-                    <img style={{ width:'100%' }}
-                    src={item.image}
-                    alt={`Mynd af ${item.title}`}
-                    />
-                    <p>{item.price} kr.-</p>
-                    <p>Fjöldi: {item.quantity}</p>
-                    <p>Samtals: {item.total} kr.-</p>
-                </div>
-                </section>
+                    <div className={styles.card} key={i}>
+                        <h3>
+                            <p className={styles.title}>{item.title}</p>
+                        </h3>
+                        <img style={{ width:'100%' }}
+                        src={item.image}
+                        alt={`Mynd af ${item.title}`}
+                        />
+                        <p>{item.price} kr.-</p>
+                        <p>Fjöldi: {item.quantity}</p>
+                        <p>Samtals: {item.total} kr.-</p>
+                    </div>
 
                 )
             })}
