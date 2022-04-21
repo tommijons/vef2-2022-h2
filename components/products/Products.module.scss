@@ -61,6 +61,19 @@
     position: relative;
   }
 
+  &__productLowerAdmin {
+    color: rgb(214, 191, 166);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 1rem;
+    position: relative;
+  }
+
+  &__productPriceAdmin {
+    text-align: center;
+  }
+
   &__productToBasket {
     display: flex;
     flex-directon: row;
@@ -72,6 +85,26 @@
     position: relative;
     margin-top: 15px;
     margin-left: 1rem;
+  }
+
+  &__button {
+    width: 50px;
+  }
+
+  &__admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__form label {
+    color: rgb(214, 191, 166);
+  }
+  
+  &__new label {
+    color: black;
   }
 
 }

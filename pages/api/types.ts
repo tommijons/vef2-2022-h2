@@ -28,8 +28,7 @@ export type CartProductsProps = {
 };
 
 export type PagingProps = {
-  limits?: number;
-  limit?: number;
+  limits: number;
   offset: number;
   items: ProductsProps[];
   _links: LinksProps;

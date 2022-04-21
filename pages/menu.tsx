@@ -21,11 +21,20 @@ export default function Menu({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const result = await fetch(`${Restaurant.url}/menu/`);
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  let off = '';
+  if(query.offset) {
+    off = `offset=${query.offset}`;
+  }
+  let lim = '';
+  if(query.limit) {
+    lim = `limit=${query.limit}`;
+  }
+
+  const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/menu?${off}&${lim}`);
   const data = await result.json();
 
   return {
     props: { data },
-  };
-};
+  }
+}

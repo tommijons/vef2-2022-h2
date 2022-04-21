@@ -1,0 +1,22 @@
+.paging {
+    &__menuLine {
+        border: 1px solid black;
+        width: 75vw;
+        margin-bottom: 3rem;
+        margin-top: 3rem;
+      }
+
+    &__pages {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__change {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 3rem;
+    }
+}

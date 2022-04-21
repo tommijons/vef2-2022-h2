@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCartContext } from '../../context/cartContext';
+import { useUserContext } from '../../context/userContext';
 import basket from '../../public/shopping-cart.png';
 
 import s from './Layout.module.scss';
@@ -14,6 +15,13 @@ type Props = {
 
 export function Layout({ title, children, footer }: Props): JSX.Element {
   const cartContext = useCartContext();
+  const loginContext = useUserContext();
+
+  let page = 'admin/menu';
+
+  if (!loginContext.login.login) {
+    page = 'menu'
+  }
 
   return (
     <div className={s.layout}>
@@ -25,7 +33,7 @@ export function Layout({ title, children, footer }: Props): JSX.Element {
               <Link href='/'>Forsíða</Link>
             </li>
             <li className={s.layout__listItem}>
-              <Link href='/menu'>Matseðill</Link>
+              <Link href={`/${page}`}>Matseðill</Link>
             </li>
             <li className={s.layout__listItem}>
               <Link href='/cart'>
