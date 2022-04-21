@@ -7,6 +7,7 @@ import { useCartContext } from "../context/cartContext";
 import { useEffect, useState } from "react";
 import { CartProductsProps } from "./api/types";
 import Router from "next/router";
+import styles from '../styles/Home.module.css';
 
 // TODO: Birta allt í körfu og búa til pöntun...
 export default function Cart() {
@@ -19,7 +20,7 @@ export default function Cart() {
             if(localStorage.getItem("cart") === null) {
                 await cartContext.newCart();
             }
-            const uid = JSON.parse(localStorage.getItem("cart"));
+            const uid = JSON.parse(localStorage.getItem("cart")!);
             const res = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/cart/${uid.id}`);
             const cart = await res.json();
             setData(cart);
@@ -48,11 +49,12 @@ export default function Cart() {
         }>
             {data.lines.map((item: CartProductsProps,i: number) => {
                 return (
-                <div key={i}>
+                <section className={styles.card}>                
+                    <div key={i}>
                     <h3>
-                        <p>{item.title}</p>
+                        <p className={styles.title}>{item.title}</p>
                     </h3>
-                    <img
+                    <img style={{ width:'100%' }}
                     src={item.image}
                     alt={`Mynd af ${item.title}`}
                     />
@@ -60,12 +62,14 @@ export default function Cart() {
                     <p>Fjöldi: {item.quantity}</p>
                     <p>Samtals: {item.total} kr.-</p>
                 </div>
+                </section>
+
                 )
             })}
-            <form onSubmit={async (event:any) => {
+            <form className={styles.container} onSubmit={async (event:any) => {
                 event.preventDefault();
                 const name = event.target.name.value;
-                const id = JSON.parse(localStorage.getItem("cart")).id;
+                const id = JSON.parse(localStorage.getItem("cart")!).id;
                 const res = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/orders`, {
                     method: 'POST',
                     headers: {
