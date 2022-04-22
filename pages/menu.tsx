@@ -14,7 +14,6 @@ export default function Menu({
 }:  InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   const { items: menuItems } = data;
   const router = useRouter();
-  let stuff
 
   return (
     <Layout title={Restaurant.name} footer={<Footer></Footer>}>
