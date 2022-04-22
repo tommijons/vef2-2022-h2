@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { breytaHandler, eydaHandler } from "../../api/handlers";
 import { ProductsProps } from "../../api/types";
 import s from './Products.module.scss';

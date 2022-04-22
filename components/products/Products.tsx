@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/link-passhref */
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import { CategoriesProps, ProductsProps } from '../../api/types';
 import s from './Products.module.scss';
