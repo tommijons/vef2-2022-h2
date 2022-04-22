@@ -1,10 +1,10 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Link from "next/link";
-import Router from "next/router";
 import { useEffect, useState } from "react";
-import { json } from "stream/consumers";
+import Category from "../../components/category/Category";
 import { Footer } from "../../components/footer/Footer";
 import { Layout } from "../../components/layout/Layout";
+import PagingCategory from "../../components/paging/PagingCategory";
 import { useUserContext } from "../../context/userContext";
 
 export default function Categories({ data }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
@@ -49,74 +49,23 @@ export default function Categories({ data }: InferGetServerSidePropsType<typeof 
     title='Flokkar'
     footer={<Footer></Footer>}
     >
-      {items.map((cat: { id: number, title: String}, i: number) => {
-        return (
-          <div key={i}>
-            <p key={i}>{cat.title}</p>
-            <button onClick={async (event:any) => {eydaHandler(cat.id, token)}}>eyða</button>
-            <form onSubmit={ async (event:any) => {
-              event.preventDefault();
-              const title = event.target.title.value;
-              await breytaHandler(cat.id, title, token);
-            }}>
-              <label htmlFor='title'>Heiti:</label><br/>
-              <input type='text' id='title'></input><br/>
-              <button type='submit'>Breyta</button>
-            </form>
-          </div>
-        )
-      })}
-      <form onSubmit={ async (event:any) => {
-        event.preventDefault();
-        const title = event.target.title.value;
-        const res = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-            },
-          body: JSON.stringify({ title }),
-        })
-      }}>
-        <label htmlFor='title'>Nýr flokkur:</label><br/>
-        <input type='text' id='title'></input><br/>
-        <button type='submit'>Búa til</button>
-      </form>
+      <Category items={items} token={token}></Category>
+      <PagingCategory paging={data}></PagingCategory>
     </Layout>
   )
 }
 
-const eydaHandler = async ( id:number, token:String ) => {
-  const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/categories/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Authorization': `Bearer ${token}`
-      },
-  })
-
-  if(result.status === 401) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  let off = '';
+  if(query.offset) {
+    off = `offset=${query.offset}`;
   }
-}
+  let lim = '';
+  if(query.limit) {
+    lim = `limit=${query.limit}`;
+  }
 
-const breytaHandler = async ( id: number, title: String, token: String ) => {
-  const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/categories/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-      },
-    body: JSON.stringify({ title }),
-  })
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const result = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories');
+  const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/categories?${off}&${lim}`);
   const data = await result.json();
 
   return {

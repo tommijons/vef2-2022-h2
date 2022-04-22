@@ -1,18 +1,10 @@
 import Link from 'next/link';
-import { useUserContext } from '../../context/userContext';
-import { PagingProps } from '../../pages/api/types';
+import { PagingCategoryProps, PagingProps, ProductsProps } from '../../pages/api/types';
 import { getPage } from '../../pages/api/utils';
 import s from './Paging.module.scss';
 
 
-export default function Paging({paging}:{paging:PagingProps}):JSX.Element {
-  const loginContext = useUserContext();
-
-  let page = 'admin/menu';
-
-  if (!loginContext.login.login) {
-    page = 'menu'
-  }
+export default function PagingCategory({paging}:{paging: PagingCategoryProps}):JSX.Element {
     return (
       <section className={s.paging}>
         <hr className={s.paging__menuLine}></hr>
@@ -20,14 +12,14 @@ export default function Paging({paging}:{paging:PagingProps}):JSX.Element {
           <h4>Síða {getPage(10, paging.offset)}</h4>
           <div className={s.paging__change}>
             {paging._links && paging._links.prev ? (
-              <Link href={`/${page}?offset=${paging.offset - 10}&limit=10`}>
+              <Link href={`/admin/categories?offset=${paging.offset - 10}&limit=10`}>
                 Fyrri
               </Link>
             ) : (
               <></>
             )}
             {paging._links && paging._links.next ? (
-              <Link href={`/${page}?offset=${paging.offset + 10}&limit=10`}>
+              <Link href={`/admin/categories?offset=${paging.offset + 10}&limit=10`}>
                 Næsta
               </Link>
             ) : (

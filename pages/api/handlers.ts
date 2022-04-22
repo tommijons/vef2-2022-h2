@@ -45,3 +45,33 @@ export const breytaHandler = async (
     }
   );
 };
+
+
+export const eydaHandlerCategory = async ( id:number, token:String ) => {
+  const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/categories/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`
+      },
+  })
+
+  if(result.status === 401) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+}
+
+export const breytaHandlerCategory = async ( id: number, title: String, token: String ) => {
+  const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/categories/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      },
+    body: JSON.stringify({ title }),
+  })
+}

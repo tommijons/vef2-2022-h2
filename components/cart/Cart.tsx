@@ -2,6 +2,7 @@ import { Button } from "../form/Button"
 import { Restaurant } from "../../pages/api/globals";
 import { useCartContext } from "../../context/cartContext";
 import { useContext } from "react";
+import s from "./Cart.module.scss"
 
 export default function Cart(productID: { product: number, quantity: number}) {
     const cartContext = useCartContext();
@@ -29,7 +30,7 @@ export default function Cart(productID: { product: number, quantity: number}) {
     
     return (
         <section>
-            <form method="post" onSubmit={onSubmit}>
+            <form className={s.cart__form} method="post" onSubmit={onSubmit}>
                 <Button>Bæta í körfu</Button>
             </form>
         </section>

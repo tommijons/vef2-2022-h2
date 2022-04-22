@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ProductsProps } from '../../pages/api/types';
+import { CategoryProps, ProductsProps } from '../../pages/api/types';
 import s from './Product.module.scss';
 import basket from '../../public/shopping-cart.png';
 import Cart from '../cart/Cart';
@@ -8,14 +8,16 @@ import Cart from '../cart/Cart';
 // TODO: Bæta við í körfu.
 export default function Product({
   product,
+  category,
 }: {
   product: ProductsProps;
+  category: CategoryProps;
 }): JSX.Element {
   return (
     <section className={s.product}>
       <h2 className={s.product__title}>{product.title}</h2>
       <hr className={s.product__dividerLine}></hr>
-      <p className={s.product__category}>{product.category.title}</p>
+      <p className={s.product__category}>{'Flokkur: ' + category.title}</p>
       <div className={s.product__product}>
         <div className={s.product__text}>
           <p className={s.product__description}>{product.description}</p>
@@ -39,9 +41,9 @@ export default function Product({
               </div>
             </div>
           </div>
-        
         </div>
       </div>
+      <Link href={'/menu'}>Til baka</Link>
     </section>
   );
 }

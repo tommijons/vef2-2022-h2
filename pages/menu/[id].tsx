@@ -5,10 +5,11 @@ import { Restaurant } from '../api/globals';
 
 export default function ProductPage({
   data,
+  cat
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   return (
     <Layout title={Restaurant.name} footer={<div></div>}>
-      <Product product={data} />
+      <Product product={data} category={cat}/>
     </Layout>
   );
 }
@@ -16,9 +17,14 @@ export default function ProductPage({
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const result = await fetch(`${Restaurant.url}/menu/${params?.id}`);
   const data = await result.json();
+
+  const categories = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/categories/${data.category}`);
+  const cat = await categories.json();
+
   return {
     props: {
       data,
+      cat,
     },
   };
 };
