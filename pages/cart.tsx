@@ -12,7 +12,7 @@ import { Button } from "../components/form/Button";
 // TODO: Birta allt í körfu og búa til pöntun...
 export default function Cart() {
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState({ lines: [] });
+    const [data, setData] = useState({ id: '', lines: [] });
     const cartContext = useCartContext();
 
     function orderMessage() {
@@ -27,6 +27,7 @@ export default function Cart() {
             const uid = JSON.parse(localStorage.getItem("cart")!);
             const res = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/cart/${uid.id}`);
             const cart = await res.json();
+            console.log(cart);
             setData(cart);
             setLoading(false);
         }
@@ -117,7 +118,7 @@ export default function Cart() {
                 localStorage.removeItem('fjoldi');
                 localStorage.removeItem('cart');
                 orderMessage();
-                Router.push(`/`);
+                Router.push(`/orders/${data.id}`);
               }
             }}
           >
