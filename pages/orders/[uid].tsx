@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { InferGetServerSidePropsType } from "next";
 import { Layout } from '../../components/layout/Layout';
 import { Footer } from "../../components/footer/Footer";
+import styles from '../../styles/Home.module.css';
 
 export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
     
@@ -46,8 +47,8 @@ export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof g
             <Footer></Footer>
         }
         >
-            <section>
-              <div>Staða Pöntunar: {state}</div>
+            <section className={styles.main}>
+              <div className={styles.title}>Staða Pöntunar: {state}</div>
             </section>
         </Layout>
     )

@@ -1,7 +1,6 @@
 import { Button } from "../form/Button"
 import { Restaurant } from "../../api/globals";
 import { useCartContext } from "../../context/cartContext";
-import { useContext } from "react";
 import s from "./Cart.module.scss"
 
 export default function Cart(productID: { product: number, quantity: number}) {
