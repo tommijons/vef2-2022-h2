@@ -146,7 +146,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/menu?${off}&${lim}&${search}&${cat}`);
   const data = await result.json();
 
-  const catResult = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/categories`);
+  const catResult = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/categories?limit=999`);
   const catData = await catResult.json();
 
   return {
