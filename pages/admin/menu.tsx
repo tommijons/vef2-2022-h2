@@ -14,6 +14,7 @@ import Search from "../../components/search/Search";
 export default function Menu({ data, query, catData }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState('');
+  const [product, setProduct] = useState('');
   const loginContext = useUserContext();
   const { items } = data;
   const catItems= catData.items
@@ -87,6 +88,8 @@ export default function Menu({ data, query, catData }: InferGetServerSidePropsTy
                 body: formData,
               }
             );
+            setProduct('')
+            alert('Vöru bætt við')
           }}
         >
           <label htmlFor='title'>Titill:</label>
