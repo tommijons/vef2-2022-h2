@@ -9,6 +9,10 @@ export default function Category({
   items: InnerCategoryProps[],
   token: string,
   }):JSX.Element {
+
+    function categoryMessage() {
+      alert('Flokk bætt við!');
+    }
   return (
     <section className={s.categories}>
       <h2 className={s.categories__title}>Flokkar</h2>
@@ -58,6 +62,7 @@ export default function Category({
               body: JSON.stringify({ title }),
             }
           );
+          categoryMessage();
         }}
       >
         <label htmlFor='title'>Nýr flokkur:</label>
