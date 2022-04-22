@@ -7,32 +7,40 @@ import { Footer } from "../../components/footer/Footer";
 export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
     
   const url = `wss://vef2-2022-h1-synilausn.herokuapp.com/orders/${uid}`;
-  const [data, setData] = useState({ order: { current_status: ''}})
+  const [state, setState] = useState('');
 
   useEffect(() => {
     function connect() {
       var wsConnection = new WebSocket(url);
-
+  
       wsConnection.onopen = function(e) {
-        
+        console.log('open');
       };
-
-      wsConnection.onmessage = function (e) {      
-          var msg = JSON.parse(e.data);
-          setData(msg);
+  
+      wsConnection.onmessage = function (e) {
+        var msg = JSON.parse(e.data);
+        console.log(msg);
+        setTimeout(() => {
+        if(msg.order.newStatus !== undefined) {
+          setState(msg.order.newStatus);
+        } else {
+          setState(msg.order.current_status);
+        }
+        }, 1000);
       }
-
+  
       wsConnection.onclose = function(e) {
+        console.log('exit');
         setTimeout(function() {
           connect();
         }, 1000);
       };
       wsConnection.onerror = function(error) {
+        alert(`error: ${error}`);
       };
     }
-    console.log(data);
     connect();
-  }, [url,data]);
+  }, []);
 
     return (
         <Layout
@@ -42,7 +50,7 @@ export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof g
         }
         >
             <section>
-              <div>Staða Pöntunar: {data.order.current_status}</div>
+              <div>Staða Pöntunar: {state}</div>
             </section>
         </Layout>
     )
