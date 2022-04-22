@@ -19,6 +19,9 @@ export default function Orders() {
           },
         });
         const res = await result.json();
+        if(res.errors !== undefined) {
+          loginContext.logOut;
+        }
         setData(res);
         setLoading(false);
       } else {
@@ -59,7 +62,7 @@ export default function Orders() {
       {data.items.map((order: { id: string, current_state: string}, i) => {
         return (
           <div key={i}>
-            <p>{order.id}</p>
+            <Link href={`/admin/orders/${order.id}`}>{order.id}</Link>
             <p>{order.current_state}</p>
           </div>
         )
