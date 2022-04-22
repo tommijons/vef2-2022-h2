@@ -3,38 +3,38 @@ import { useEffect } from "react";
 import { InferGetServerSidePropsType } from "next";
 import { Layout } from '../../components/layout/Layout';
 import { Footer } from "../../components/footer/Footer";
-import { useCartContext } from "../../context/cartContext";
 
 export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+    
+  //const [data, setData] = useState({ current_status: '' });
+  const url = `ws://vef2-2022-h1-synilausn.herokuapp.com/orders/${uid}`;
 
-    //const uid = JSON.parse(localStorage.getItem("cart")!).id;
-    console.log("uid->", uid);
-    const url = `ws://vef2-2022-h1-synilausn.herokuapp.com/orders/${uid}`;
-    var wsConnection = new WebSocket(url, "protocolOne");
+  function connect() {
+    var wsConnection = new WebSocket(url);
 
     wsConnection.onopen = function(e) {
-        alert("[open] Connection established");
-        alert("Sending to server");
+        alert("WebSocket tenging!");
       };
 
     wsConnection.onmessage = function (e) {
         console.log(e.data);
-        alert(`Data received from server: ${e.data}`);
+        alert(`Pöntun: ${e.data}`);
         var msg = JSON.parse(e.data);
+        //setData(msg);
     }
 
     wsConnection.onclose = function(e) {
-        if (e.wasClean) {
-          alert(`[close] Connection closed cleanly, code=${e.code} reason=${e.reason}`);
-        } else {
-
-          alert('[close] Connection died');
-        }
-      };
-      wsConnection.onerror = function(error) {
-        alert(`[error] ${error}`);
-      };
-
+      alert(`WebSocket tenging rofnaði, tilraun verður gerð til endurtengingar, code=${e.code} reason=${e.reason}`);
+      setTimeout(function() {
+        connect();
+      }, 1000);
+    };
+    wsConnection.onerror = function(error) {
+      alert(`error: ${error}`);
+    };
+  }
+  
+  connect();
 
     return (
         <Layout
@@ -43,7 +43,9 @@ export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof g
             <Footer></Footer>
         }
         >
-            <div>Staða pöntunar: </div>
+            <section>
+              <div>Staða Pöntunar: </div>
+            </section>
         </Layout>
     )
 }

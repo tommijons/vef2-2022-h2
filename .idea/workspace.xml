@@ -30,8 +30,12 @@
       <option name="presentableId" value="Default" />
       <updated>1650587282917</updated>
       <workItem from="1650587289752" duration="15000" />
+      <workItem from="1650649936953" duration="99000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -43,5 +47,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
