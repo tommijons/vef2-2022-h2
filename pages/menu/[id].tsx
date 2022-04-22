@@ -2,13 +2,14 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Layout } from '../../components/layout/Layout';
 import Product from '../../components/product/Product';
 import { Restaurant } from '../../api/globals';
+import { Footer } from '../../components/footer/Footer';
 
 export default function ProductPage({
   data,
   cat
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   return (
-    <Layout title={Restaurant.name} footer={<div></div>}>
+    <Layout title={Restaurant.name} footer={<Footer></Footer>}>
       <Product product={data} category={cat}/>
     </Layout>
   );

@@ -14,6 +14,10 @@ export default function Cart() {
     const [data, setData] = useState({ lines: [] });
     const cartContext = useCartContext();
 
+    function orderMessage() {
+      alert("Pöntun móttekin!");
+    }
+    
     useEffect(() => {
         const getCart = async () => {
             if(localStorage.getItem("cart") === null) {
@@ -89,6 +93,7 @@ export default function Cart() {
                 cartContext.setFjoldi(0);
                 localStorage.removeItem('fjoldi');
                 localStorage.removeItem('cart');
+                orderMessage();
                 Router.push(`/`);
               }
             }}

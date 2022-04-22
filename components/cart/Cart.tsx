@@ -6,6 +6,9 @@ import s from "./Cart.module.scss"
 
 export default function Cart(productID: { product: number, quantity: number}) {
     const cartContext = useCartContext();
+    function cartMessage() {
+        alert("Bætt í körfu!");
+    }
     async function onSubmit(e: any) {
         e.preventDefault();
 
@@ -25,6 +28,7 @@ export default function Cart(productID: { product: number, quantity: number}) {
         });
         const result = await res.json();
         cartContext.addItem();
+        cartMessage();
         return result;
         };
     
