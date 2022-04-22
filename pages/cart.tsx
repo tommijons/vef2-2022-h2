@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { CartProductsProps } from "../api/types";
 import Router from "next/router";
 import styles from '../styles/Home.module.css';
+import { Button } from "../components/form/Button";
 
 // TODO: Birta allt í körfu og búa til pöntun...
 export default function Cart() {
@@ -65,6 +66,28 @@ export default function Cart() {
                 <p>{item.price} kr.-</p>
                 <p>Fjöldi: {item.quantity}</p>
                 <p>Samtals: {item.total} kr.-</p>
+                <form method="delete" onSubmit={async (e: any) => {
+                  e.preventDefault();
+                  const lineid = item.id;
+                  const uid = JSON.parse(localStorage.getItem("cart") ?? '').id;
+                  const res = await fetch(`${Restaurant.url}/cart/${uid}/line/${lineid}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: '*/*',
+                        'Accept-Encoding': 'gzip, deflate, br',
+                        Connection: 'keep-alive',
+                      },
+                });
+                if (res.ok) {
+                  cartContext.removeItem();
+                  alert("Vöru eytt úr körfu!")
+                }
+                
+                }
+              }>
+                  <Button>Eyða úr körfu</Button>
+                </form>
               </div>
             );
           })}

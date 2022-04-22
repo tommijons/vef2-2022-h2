@@ -28,6 +28,11 @@ export function CartWrapper({ children }) {
         setFjoldi(nyrFjoldi);
         localStorage.setItem("fjoldi", nyrFjoldi);
     }
+    const removeItem = () => {
+        const nyrFjoldi = fjoldi - 1;
+        setFjoldi(nyrFjoldi);
+        localStorage.setItem("fjoldi", nyrFjoldi);
+    }
     
     useEffect(() => {   
         if (JSON.parse(localStorage.getItem("cart"))) { 
@@ -46,6 +51,7 @@ export function CartWrapper({ children }) {
             fjoldi,
             setFjoldi,
             addItem,
+            removeItem,
         }}>
             { children }
         </CartContext.Provider>
