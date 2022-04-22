@@ -6,35 +6,33 @@ import { Footer } from "../../components/footer/Footer";
 
 export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
     
-  //const [data, setData] = useState({ current_status: '' });
-  const url = `ws://vef2-2022-h1-synilausn.herokuapp.com/orders/${uid}`;
+  const url = `wss://vef2-2022-h1-synilausn.herokuapp.com/orders/${uid}`;
+  const [data, setData] = useState({ order: { current_status: ''}})
 
-  function connect() {
-    var wsConnection = new WebSocket(url);
+  useEffect(() => {
+    function connect() {
+      var wsConnection = new WebSocket(url);
 
-    wsConnection.onopen = function(e) {
-        alert("WebSocket tenging!");
+      wsConnection.onopen = function(e) {
+        
       };
 
-    wsConnection.onmessage = function (e) {
-        console.log(e.data);
-        alert(`Pöntun: ${e.data}`);
-        var msg = JSON.parse(e.data);
-        //setData(msg);
-    }
+      wsConnection.onmessage = function (e) {      
+          var msg = JSON.parse(e.data);
+          setData(msg);
+      }
 
-    wsConnection.onclose = function(e) {
-      alert(`WebSocket tenging rofnaði, tilraun verður gerð til endurtengingar, code=${e.code} reason=${e.reason}`);
-      setTimeout(function() {
-        connect();
-      }, 1000);
-    };
-    wsConnection.onerror = function(error) {
-      alert(`error: ${error}`);
-    };
-  }
-  
-  connect();
+      wsConnection.onclose = function(e) {
+        setTimeout(function() {
+          connect();
+        }, 1000);
+      };
+      wsConnection.onerror = function(error) {
+      };
+    }
+    console.log(data);
+    connect();
+  }, [url,data]);
 
     return (
         <Layout
@@ -44,7 +42,7 @@ export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof g
         }
         >
             <section>
-              <div>Staða Pöntunar: </div>
+              <div>Staða Pöntunar: {data.order.current_status}</div>
             </section>
         </Layout>
     )

@@ -25,7 +25,6 @@ export default function Order({ uid }: InferGetServerSidePropsType<typeof getSer
           setNotfound(true);
         } else {
           const res = await result.json();
-          console.log(res);
           if(res.error !== undefined) {
             await loginContext.logOut();
           } else {
@@ -81,7 +80,7 @@ export default function Order({ uid }: InferGetServerSidePropsType<typeof getSer
         return (
           <div key={i}>
             <p>{product.title}</p>
-            <p>{product.quantity}</p>
+            <p>Fjöldi: {product.quantity}</p>
           </div>
         )
       })}
