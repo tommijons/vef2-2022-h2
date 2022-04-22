@@ -5,6 +5,7 @@ import Paging from '../components/paging/Paging';
 import { Products } from '../components/products/Products';
 import { Restaurant } from '../api/globals';
 import { useRouter } from 'next/router';
+import { Footer } from '../components/footer/Footer';
 
 export default function Menu({
   data,
@@ -16,7 +17,7 @@ export default function Menu({
   let stuff
 
   return (
-    <Layout title={Restaurant.name} footer={<div></div>}>
+    <Layout title={Restaurant.name} footer={<Footer></Footer>}>
       <Head>
         <title>Matseðill</title>
       </Head>
