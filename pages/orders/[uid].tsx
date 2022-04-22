@@ -14,12 +14,10 @@ export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof g
       var wsConnection = new WebSocket(url);
   
       wsConnection.onopen = function(e) {
-        console.log('open');
       };
   
       wsConnection.onmessage = function (e) {
         var msg = JSON.parse(e.data);
-        console.log(msg);
         setTimeout(() => {
         if(msg.order.newStatus !== undefined) {
           setState(msg.order.newStatus);
@@ -30,7 +28,6 @@ export default function OrdersPage({ uid }: InferGetServerSidePropsType<typeof g
       }
   
       wsConnection.onclose = function(e) {
-        console.log('exit');
         setTimeout(function() {
           connect();
         }, 1000);
