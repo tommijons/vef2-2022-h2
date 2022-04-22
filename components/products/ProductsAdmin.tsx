@@ -13,7 +13,7 @@ export function ProductsAdmin({
 }): JSX.Element {
   return (
     <li className={s.products__product} key={key}>
-      <div className={s.products__productImage}>
+      <div className={s.products__productImageAdmin}>
         {prod.image && (
           <img
             className={s.products__productImg}
