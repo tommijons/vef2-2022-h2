@@ -5,9 +5,8 @@ import { Footer } from "../../components/footer/Footer";
 import { Layout } from "../../components/layout/Layout";
 import { ProductsAdmin } from "../../components/products/ProductsAdmin";
 import { useUserContext } from "../../context/userContext";
-import { ProductsProps } from "../../api/types";
+import { InnerCategoryProps, ProductsProps } from "../../api/types";
 import s from '../../components/products/Products.module.scss';
-import { getPage } from "../../api/utils";
 import Paging from "../../components/paging/Paging";
 import Search from "../../components/search/Search";
 
@@ -17,6 +16,7 @@ export default function Menu({ data, query, catData }: InferGetServerSidePropsTy
   const [token, setToken] = useState('');
   const loginContext = useUserContext();
   const { items } = data;
+  const catItems= catData.items
 
   let offset = data.offset;
 
@@ -59,7 +59,7 @@ export default function Menu({ data, query, catData }: InferGetServerSidePropsTy
         <Search query={query} categories={catData}></Search>
         <ul className={s.products__list}>
           {items.map((prod: ProductsProps, i: number) => {
-            return <ProductsAdmin prod={prod} key={i} token={token} />;
+            return <ProductsAdmin prod={prod} key={i} token={token} categories={catItems}/>;
           })}
         </ul>
       </section>
@@ -101,9 +101,15 @@ export default function Menu({ data, query, catData }: InferGetServerSidePropsTy
           <br />
           <input type='text' id='description'></input>
           <br />
-          <label htmlFor='category'>Númer flokks:</label>
+          <label htmlFor='category'>Flokkur:</label>
           <br />
-          <input type='number' id='category' min={1}></input>
+          <select id='category'>
+            {catItems.map((item: InnerCategoryProps, i: number) => {
+              return (
+                <option key={i} value={item.id}>{item.title}</option>
+              )
+            })}
+          </select>
           <br />
           <label htmlFor='imgae'>Mynd:</label>
           <br />

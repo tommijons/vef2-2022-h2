@@ -1,16 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import { breytaHandler, eydaHandler } from "../../api/handlers";
-import { ProductsProps } from "../../api/types";
+import { InnerCategoryProps, ProductsProps } from "../../api/types";
 import s from './Products.module.scss';
 
 export function ProductsAdmin({
   prod,
   key,
   token,
+  categories
 }: {
   prod: ProductsProps;
   key: number;
   token: string;
+  categories: InnerCategoryProps[]
 }): JSX.Element {
   return (
     <li className={s.products__product} key={key}>
@@ -66,9 +68,15 @@ export function ProductsAdmin({
           <br />
           <input type='text' id='description'></input>
           <br />
-          <label htmlFor='category'>Númer flokks:</label>
+          <label htmlFor='category'>Flokkur:</label>
           <br />
-          <input type='number' id='category' min={1}></input>
+          <select id='category'>
+            {categories.map((item: InnerCategoryProps, i: number) => {
+              return (
+                <option key={i} value={item.id}>{item.title}</option>
+              )
+            })}
+          </select>
           <br />
           <label htmlFor='imgae'>Mynd:</label>
           <br />
