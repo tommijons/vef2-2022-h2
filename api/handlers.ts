@@ -1,3 +1,5 @@
+import Router from "next/router"
+
 export const eydaHandler = async ( id:number, token:String ) => {
     const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/menu/${id}`, {
       method: 'DELETE',
@@ -16,6 +18,7 @@ export const eydaHandler = async ( id:number, token:String ) => {
     }
 
     alert("Vöru eytt")
+    Router.reload()
   }
   
 export const breytaHandler = async (
@@ -46,6 +49,7 @@ export const breytaHandler = async (
     }
   );
   alert("Vöru breytt")
+  Router.reload()
 };
 
 
@@ -67,6 +71,7 @@ export const eydaHandlerCategory = async ( id:number, token:String ) => {
   }
 
   alert("Flokki eytt")
+  Router.reload()
 }
 
 export const breytaHandlerCategory = async ( id: number, title: String, token: String ) => {
@@ -79,4 +84,5 @@ export const breytaHandlerCategory = async ( id: number, title: String, token: S
     body: JSON.stringify({ title }),
   })
   alert("Flokki breytt")
+  Router.reload()
 }
