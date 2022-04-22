@@ -117,7 +117,7 @@ export default function Cart() {
                 localStorage.removeItem('fjoldi');
                 localStorage.removeItem('cart');
                 orderMessage();
-                Router.push(`/`);
+                Router.push(`/orders/${id}`);
               }
             }}
           >
