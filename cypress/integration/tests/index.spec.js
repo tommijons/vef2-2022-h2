@@ -7,13 +7,13 @@
 
 describe('index', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/');
+    cy.visit('https://vef2-2022-h2-mocha.vercel.app/');
     cy.get('nav').contains('Matseðill').click();
   })
 
   it('visits matseðill', () => {
 
-    cy.visit('http://localhost:3000/menu', {
+    cy.visit('https://vef2-2022-h2-mocha.vercel.app/menu', {
       timeout: 50000,
       onBeforeLoad (contentWindow) {
         // contentWindow is the remote page's window object
