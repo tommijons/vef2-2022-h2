@@ -1,5 +1,5 @@
-import { breytaHandlerCategory, eydaHandlerCategory } from "../../pages/api/handlers";
-import { CategoriesProps, InnerCategoryProps } from "../../pages/api/types";
+import { breytaHandlerCategory, eydaHandlerCategory } from "../../api/handlers";
+import { CategoriesProps, InnerCategoryProps } from "../../api/types";
 import s from "./Category.module.scss"
 
 export default function Category({

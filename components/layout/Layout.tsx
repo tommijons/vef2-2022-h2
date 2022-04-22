@@ -40,6 +40,11 @@ export function Layout({ title, children, footer }: Props): JSX.Element {
                 <Link href={`/admin/categories`}>Flokkar</Link>
               </li> ) : ( <></> )
             }
+            {loginContext.login.login ? (
+              <li className={s.layout__listItem}>
+                <Link href={`/admin/orders`}>Pantanir</Link>
+              </li> ) : ( <></> )
+            }
             <li className={s.layout__listItem}>
               <Link href='/cart'>
                 <div className={s.layout__cart}>

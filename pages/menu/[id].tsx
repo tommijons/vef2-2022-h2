@@ -1,7 +1,7 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Layout } from '../../components/layout/Layout';
 import Product from '../../components/product/Product';
-import { Restaurant } from '../api/globals';
+import { Restaurant } from '../../api/globals';
 
 export default function ProductPage({
   data,

@@ -1,5 +1,5 @@
-import { breytaHandler, eydaHandler } from "../../pages/api/handlers";
-import { ProductsProps } from "../../pages/api/types";
+import { breytaHandler, eydaHandler } from "../../api/handlers";
+import { ProductsProps } from "../../api/types";
 import s from './Products.module.scss';
 
 export function ProductsAdmin({

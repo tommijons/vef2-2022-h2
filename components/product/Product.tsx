@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CategoryProps, ProductsProps } from '../../pages/api/types';
+import { CategoryProps, ProductsProps } from '../../api/types';
 import s from './Product.module.scss';
 import basket from '../../public/shopping-cart.png';
 import Cart from '../cart/Cart';

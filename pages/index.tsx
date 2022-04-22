@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { Layout } from '../components/layout/Layout'
 import { Footer } from '../components/footer/Footer'
-import { Restaurant } from './api/globals'
+import { Restaurant } from '../api/globals'
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {

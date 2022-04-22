@@ -1,5 +1,5 @@
 import { Button } from "../form/Button"
-import { Restaurant } from "../../pages/api/globals";
+import { Restaurant } from "../../api/globals";
 import { useCartContext } from "../../context/cartContext";
 import { useContext } from "react";
 import s from "./Cart.module.scss"

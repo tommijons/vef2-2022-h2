@@ -50,6 +50,17 @@
   text-align: center;
 }
 
+.title1 {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.line {
+  border: 1px solid black;
+  width: 75vw;
+  margin-bottom: 3rem;
+}
+
 .description {
   margin: 4rem 0;
   line-height: 1.5;
@@ -73,6 +84,14 @@
   max-width: 800px;
 }
 
+.cards {
+  display: grid;
+  grid-gap: 4rem;
+  grid-template-columns: repeat(auto-fit, 250px);
+  width: 100vw;
+  justify-content: center;
+}
+
 .card {
   margin: 1rem;
   padding: 1.5rem;
@@ -82,7 +101,11 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card:hover,
@@ -103,9 +126,27 @@
   line-height: 1.5;
 }
 
+.cardImage {
+  height: 200px;
+  width: 200px;
+}
+
+.cardImg {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 600px) {

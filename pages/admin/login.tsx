@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { useUserContext } from '../../context/userContext';
-import { Restaurant } from '../api/globals';
+import { Restaurant } from '../../api/globals';
 
 const loginHandler = async (event: any) => {
   event.preventDefault();

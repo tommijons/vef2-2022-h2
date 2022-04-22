@@ -5,13 +5,14 @@ import { Footer } from "../../components/footer/Footer";
 import { Layout } from "../../components/layout/Layout";
 import { ProductsAdmin } from "../../components/products/ProductsAdmin";
 import { useUserContext } from "../../context/userContext";
-import { ProductsProps } from "../api/types";
+import { ProductsProps } from "../../api/types";
 import s from '../../components/products/Products.module.scss';
-import { getPage } from "../api/utils";
+import { getPage } from "../../api/utils";
 import Paging from "../../components/paging/Paging";
+import Search from "../../components/search/Search";
 
 
-export default function Menu({ data }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+export default function Menu({ data, query, catData }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState('');
   const loginContext = useUserContext();
@@ -55,6 +56,7 @@ export default function Menu({ data }: InferGetServerSidePropsType<typeof getSer
       <section className={s.products}>
         <h2 className={s.products__title}>Matseðill - Stjórnendur</h2>
         <hr className={s.products__menuLine}></hr>
+        <Search query={query} categories={catData}></Search>
         <ul className={s.products__list}>
           {items.map((prod: ProductsProps, i: number) => {
             return <ProductsAdmin prod={prod} key={i} token={token} />;
@@ -111,7 +113,7 @@ export default function Menu({ data }: InferGetServerSidePropsType<typeof getSer
         </form>
       </div>
       <div className='paging'>
-        <Paging paging={data}></Paging>
+        <Paging paging={data} query={query}></Paging>
       </div>
     </Layout>
   );
@@ -126,11 +128,22 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   if(query.limit) {
     lim = `limit=${query.limit}`;
   }
+  let search = '';
+  if(query.search) {
+    search = `search=${query.search}`;
+  }
+  let cat = ''
+  if(query.category) {
+    cat = `category=${query.category}`;
+  }
 
-  const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/menu?${off}&${lim}`);
+  const result = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/menu?${off}&${lim}&${search}&${cat}`);
   const data = await result.json();
 
+  const catResult = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/categories`);
+  const catData = await catResult.json();
+
   return {
-    props: { data },
+    props: { data, query, catData },
   }
 }

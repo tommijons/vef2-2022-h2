@@ -1,22 +1,29 @@
 import Link from 'next/link';
-import { ProductsProps } from '../../pages/api/types';
+import { CategoriesProps, ProductsProps } from '../../api/types';
 import s from './Products.module.scss';
 import basket from '../../public/shopping-cart.png';
 import Image from 'next/image';
 import Cart from '../cart/Cart';
+import Search from '../search/Search';
+import { ParsedUrlQuery } from 'querystring';
 
 // TODO: bæta við í körfu.
 export function Products({
   title,
   products,
+  query,
+  categories
 }: {
   title: string;
   products: ProductsProps[];
+  query: ParsedUrlQuery;
+  categories: CategoriesProps;
 }): JSX.Element {
   return (
     <section className={s.products}>
       <h2 className={s.products__title}>{title}</h2>
       <hr className={s.products__menuLine}></hr>
+      <Search query={query} categories={categories}></Search>
       <ul className={s.products__list}>
         {products.map((item, i) => {
           return (

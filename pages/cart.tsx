@@ -1,11 +1,9 @@
 import { Layout } from "../components/layout/Layout"
 import { Footer } from "../components/footer/Footer"
-import { Restaurant } from "./api/globals"
-import { Button } from "../components/form/Button";
-import { GetServerSideProps } from "next";
+import { Restaurant } from "../api/globals"
 import { useCartContext } from "../context/cartContext";
 import { useEffect, useState } from "react";
-import { CartProductsProps } from "./api/types";
+import { CartProductsProps } from "../api/types";
 import Router from "next/router";
 import styles from '../styles/Home.module.css';
 
@@ -32,7 +30,7 @@ export default function Cart() {
     if(loading) {
         return (
             <Layout
-            title='Flokkar'
+            title='Karfa'
             footer={<Footer></Footer>}
             >
                 <p>loading...</p>
@@ -40,53 +38,67 @@ export default function Cart() {
         )
     }
 
-    return(
-        <Layout
-        title={Restaurant.name}
-
-        footer={
-            <Footer></Footer>
-        }>
-            {data.lines.map((item: CartProductsProps,i: number) => {
-                return (
-                    <div className={styles.card} key={i}>
-                        <h3>
-                            <p className={styles.title}>{item.title}</p>
-                        </h3>
-                        <img style={{ width:'100%' }}
-                        src={item.image}
-                        alt={`Mynd af ${item.title}`}
-                        />
-                        <p>{item.price} kr.-</p>
-                        <p>Fjöldi: {item.quantity}</p>
-                        <p>Samtals: {item.total} kr.-</p>
-                    </div>
-
-                )
-            })}
-            <form className={styles.container} onSubmit={async (event:any) => {
-                event.preventDefault();
-                const name = event.target.name.value;
-                const id = JSON.parse(localStorage.getItem("cart")!).id;
-                const res = await fetch(`https://vef2-2022-h1-synilausn.herokuapp.com/orders`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ cart: id, name}),
-                })
-                if(res.ok) {
-                  cartContext.setCart({});
-                  cartContext.setFjoldi(0);
-                  localStorage.removeItem("fjoldi");
-                  localStorage.removeItem("cart");
-                  Router.push(`/`)
+    return (
+      <Layout title={Restaurant.name} footer={<Footer></Footer>}>
+        <h2 className={styles.title1}>Karfa</h2>
+        <hr className={styles.line}></hr>
+        <section className={styles.cards}>
+          {data.lines.map((item: CartProductsProps, i: number) => {
+            return (
+              <div className={styles.card} key={i}>
+                <h3>
+                  <p className={styles.title1}>{item.title}</p>
+                </h3>
+                <div className={styles.cardImage}>
+                  <img
+                    className={styles.cardImg}
+                    style={{ width: '100%' }}
+                    src={item.image}
+                    alt={`Mynd af ${item.title}`}
+                  />
+                </div>
+                <p>{item.price} kr.-</p>
+                <p>Fjöldi: {item.quantity}</p>
+                <p>Samtals: {item.total} kr.-</p>
+              </div>
+            );
+          })}
+        </section>
+        <hr className={styles.line}></hr>
+        <h2 className={styles.title1}>Panta</h2>
+        <div className={styles.order}>
+          <form
+            className={styles.container}
+            onSubmit={async (event: any) => {
+              event.preventDefault();
+              const name = event.target.name.value;
+              const id = JSON.parse(localStorage.getItem('cart')!).id;
+              const res = await fetch(
+                `https://vef2-2022-h1-synilausn.herokuapp.com/orders`,
+                {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ cart: id, name }),
                 }
-            }}>
-                <label htmlFor="name">Nafn:</label><br/>
-                <input type='text' id='name'></input><br/>
-                <button>Panta</button>
-            </form>
-        </Layout>
-    )
+              );
+              if (res.ok) {
+                cartContext.setCart({});
+                cartContext.setFjoldi(0);
+                localStorage.removeItem('fjoldi');
+                localStorage.removeItem('cart');
+                Router.push(`/`);
+              }
+            }}
+          >
+            <label htmlFor='name'>Nafn:</label>
+            <br />
+            <input type='text' id='name'></input>
+            <br />
+            <button>Panta</button>
+          </form>
+        </div>
+      </Layout>
+    );
 }

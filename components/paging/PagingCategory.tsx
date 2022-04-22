@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { PagingCategoryProps, PagingProps, ProductsProps } from '../../pages/api/types';
-import { getPage } from '../../pages/api/utils';
+import { PagingCategoryProps, PagingProps, ProductsProps } from '../../api/types';
+import { getPage } from '../../api/utils';
 import s from './Paging.module.scss';
 
 
